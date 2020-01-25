@@ -1,1 +1,5 @@
 venv/
+BOTA/*
+cards/*
+out/*
+tmp/*
