@@ -1,0 +1,2 @@
+## About
+The purpose of this repository is to serve as a collection of automation scripts I wrote.  These scripts will most definately not be of use to anyone as they are mostly designed for a spasific task.
