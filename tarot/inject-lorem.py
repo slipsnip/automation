@@ -23,6 +23,7 @@ if __name__ == '__main__':
     full_fields = ['galileo_content','f_loss_content','st_paul_content']
     single_fields =  'astrological,alchemical,intelligence,hebrew_letter,letter_meaning'.split(',')
     image_fields = ['tarot_card_thumbnail']
+    table_name = 'generators_generator'
 
     field_types = {
         'title':numpy.object,
@@ -58,4 +59,4 @@ if __name__ == '__main__':
                 else:
                     continue
                 cards.at[index, column] = generator()
-    cards.to_csv("lorem.csv", index=False)
+    cards.to_csv(f'{table_name}'.csv', index=False)
