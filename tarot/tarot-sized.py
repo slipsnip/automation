@@ -1,3 +1,7 @@
+""" This script fills a use case where I needed batch / mogrify functionality
+but with the ability to use image magick's quality, sampling and strip to batch
+crop and downscale tarot card images to be used for thumbnails"""
+
 import argparse
 from pathlib import Path
 import subprocess
