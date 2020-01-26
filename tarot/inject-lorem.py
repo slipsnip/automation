@@ -59,4 +59,4 @@ if __name__ == '__main__':
                 else:
                     continue
                 cards.at[index, column] = generator()
-    cards.to_csv(f'{table_name}'.csv', index=False)
+    cards.to_csv(f'{table_name}.csv', index=False)
