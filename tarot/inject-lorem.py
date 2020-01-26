@@ -18,11 +18,35 @@ word = partial(fake.word, ext_word_list=LOREM)
 
 if __name__ == '__main__':
     CSV = str(Path('./generators.csv').resolve())
+    # url data for tarot_card_image field, dict(id:url)
+    IMGUR = {2:'https://i.imgur.com/OWFv2l5.jpg',
+    18:'https://i.imgur.com/WSju3NU.jpg',
+    8:'https://i.imgur.com/RIjxAh0.jpg',
+    22:'https://i.imgur.com/aVYxJ9k.jpg',
+    1:'https://i.imgur.com/3t5OZ95.jpg',
+    12:'https://i.imgur.com/BzXabA5.jpg',
+    7:'https://i.imgur.com/RU5dusE.jpg',
+    5:'https://i.imgur.com/WxuFI1E.jpg',
+    17:'https://i.imgur.com/2zKPo0E.jpg',
+    14:'https://i.imgur.com/To8PXjL.jpg',
+    6:'https://i.imgur.com/8JpuOOC.jpg',
+    20:'https://i.imgur.com/ZxSKw3T.jpg',
+    13:'https://i.imgur.com/xHOtAuQ.jpg',
+    4:'https://i.imgur.com/F4IyE5l.jpg',
+    11:'https://i.imgur.com/HVgn6Jg.jpg',
+    3:'https://i.imgur.com/ph1uA6K.jpg',
+    10:'https://i.imgur.com/L4TIBCx.jpg',
+    19:'https://i.imgur.com/hBF4bFS.jpg',
+    21:'https://i.imgur.com/RrAlqRf.jpg',
+    16:'https://i.imgur.com/6T1hTDa.jpg',
+    15:'https://i.imgur.com/8AMB8KX.jpg',
+    9:'https://i.imgur.com/JSr4wbA.jpg'
+    }
+    
     fields = 'id,title_x,number,tarot_card_image,astrological,alchemical,intelligence,hebrew_letter,letter_meaning,description_x,galileo_content,f_loss_content,st_paul_content,f_loss_bullets,galileo_bullets,st_paul_bullets,description_bullets,slashdot_position,watchtower_position,title_y,description_y,tarot_card_thumbnail'.split(',')
     bullet_fields = ['description_bullets','galileo_bullets','f_loss_bullets','st_paul_bullets']
     full_fields = ['galileo_content','f_loss_content','st_paul_content']
     single_fields =  'astrological,alchemical,intelligence,hebrew_letter,letter_meaning'.split(',')
-    image_fields = ['tarot_card_thumbnail']
     table_name = 'generators_generator'
 
     field_types = {
@@ -56,6 +80,8 @@ if __name__ == '__main__':
                     generator = paragraph
                 elif (column in single_fields):
                     generator = word
+                elif (column == 'tarot_card_image'):
+                    generator = partial(IMGUR.get, card['id'])
                 else:
                     continue
                 cards.at[index, column] = generator()
