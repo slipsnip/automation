@@ -3,5 +3,5 @@ BOTA/*
 cards/*
 out/*
 tmp/*
-/.vscode/.ropeproject/
+.vscode/
 db.sqlite3
