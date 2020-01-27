@@ -4,4 +4,4 @@ cards/*
 out/*
 tmp/*
 .vscode/
-db.sqlite3
+**/db.sqlite3
