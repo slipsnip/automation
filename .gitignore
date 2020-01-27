@@ -4,3 +4,4 @@ cards/*
 out/*
 tmp/*
 /.vscode/.ropeproject/
+db.sqlite3
