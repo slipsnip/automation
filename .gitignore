@@ -5,3 +5,4 @@ out/*
 tmp/*
 .vscode/
 **/db.sqlite3
+tarot/db.sqlite3
