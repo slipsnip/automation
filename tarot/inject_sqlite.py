@@ -32,6 +32,12 @@ class TarotDatabaseConnection(object):
         self.connection.close()
 
 
+def imageToBinary(image):
+    with image.open('rb') as file:
+        blob = file.read()
+    return blob
+
+
 if __name__ == "__main__":
     CSV_SRC = 'generators_generator.csv'
     data = pandas.read_csv(CSV_SRC)
@@ -46,9 +52,30 @@ if __name__ == "__main__":
     database = arguments.database
     table_name = arguments.table
     field = arguments.field
-    image_dir = arguments.images
+    image_dir = Path(arguments.images)
+    fields = ("id,title,number,tarot_card_image,astrological,alchemical,"
+                "intelligence,hebrew_letter,letter_meaning,description,"
+                "galileo_content,f_loss_content,st_paul_content,f_loss_bullets,"
+                "galileo_bullets,st_paul_bullets,description_bullets,"
+                "slashdot_position,watchtower_position,tarot_card_thumbnail").strip().split(",")
 
     with TarotDatabaseConnection(database) as db:
         # drop existing records from table
-        db.cursor.execute(f"DELETE FROM {table_name}",)
+        db.cursor.execute(f"DELETE FROM {table_name}")
         db.connection.commit()
+
+        for index, record in data.iterrows():
+            if record['number'] != 0:
+                image_file = f"K{record['number']:02d}.jpg"
+            else:
+                image_file = f"K{record['number']}.jpg"
+            image = list(image_dir.glob(image_file))[0]
+            image = imageToBinary(image)
+            data_values = [record[field] for field in fields[:-1]]
+            data_values.append(image)
+            data_values = tuple(data_values)
+            placeholders = ("?," * len(fields)).rstrip(',')
+            sql = f"INSERT INTO {table_name} {tuple(fields)} VALUES ({placeholders})"
+            db.cursor.execute(sql, data_values)
+            db.connection.commit()
+
