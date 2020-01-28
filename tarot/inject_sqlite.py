@@ -24,7 +24,7 @@ class TarotDatabaseConnection(object):
         self.database = database
 
     def __enter__(self):
-        self.connection = sqlite3.connect("db.sqlite3")
+        self.connection = sqlite3.connect(self.database)
         self.cursor = self.connection.cursor()
         return self
 
