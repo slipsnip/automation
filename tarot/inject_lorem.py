@@ -74,7 +74,7 @@ if __name__ == "__main__":
         "st_paul_bullets": numpy.object,
     }
 
-    fields = "id,title_x,number,tarot_card_image,astrological,alchemical,intelligence,hebrew_letter,letter_meaning,description_x,galileo_content,f_loss_content,st_paul_content,f_loss_bullets,galileo_bullets,st_paul_bullets,description_bullets,slashdot_position,watchtower_position,title_y,description_y,tarot_card_thumbnail".split(
+    fields = "id,title,number,tarot_card_image,astrological,alchemical,intelligence,hebrew_letter,letter_meaning,description,galileo_content,f_loss_content,st_paul_content,f_loss_bullets,galileo_bullets,st_paul_bullets,description_bullets,slashdot_position,watchtower_position,title_y,tarot_card_thumbnail".split(
         ","
     )
     bullet_fields = [
