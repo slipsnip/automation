@@ -16,6 +16,8 @@ import pandas
 import argparse
 from pathlib import Path
 
+MEDIA_URL = 'thumbnails/'
+
 
 class TarotDatabaseConnection(object):
     def __init__(self, database):
@@ -31,7 +33,7 @@ class TarotDatabaseConnection(object):
     def __exit__(self, *exc):
         self.connection.close()
 
-
+# depreciated - django uses url for field
 def imageToBinary(image):
     with image.open('rb') as file:
         blob = file.read()
@@ -66,13 +68,14 @@ if __name__ == "__main__":
 
         for index, record in data.iterrows():
             if record['number'] != 0:
-                image_file = f"K{record['number']:02d}.jpg"
+                image_file = f"{MEDIA_URL}K{record['number']:02d}.jpg"
             else:
-                image_file = f"K{record['number']}.jpg"
-            image = list(image_dir.glob(image_file))[0]
-            image = imageToBinary(image)
+                image_file = f"{MEDIA_URL}K{record['number']}.jpg"
+            # image = list(image_dir.glob(image_file))[0]
+            # image = imageToBinary(image)
+
             data_values = [record[field] for field in fields[:-1]]
-            data_values.append(image)
+            data_values.append(image_file)
             data_values = tuple(data_values)
             placeholders = ("?," * len(fields)).rstrip(',')
             sql = f"INSERT INTO {table_name} {tuple(fields)} VALUES ({placeholders})"
